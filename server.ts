@@ -100,7 +100,7 @@ app.use("/", function (req, res, next) {
 		next();
 })
 
-// 5. cors 
+// 6. cors 
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin)
@@ -117,15 +117,12 @@ const corsOptions = {
 };
 app.use("/", cors(corsOptions) as any);
 
-// 6. binary upload
+// 7. binary upload
+/*
 app.use(fileUpload({
 	"limits ": { "fileSize ": (10 * 1024 * 1024) }  // 10 MB
 }));
 
-// 7. base64 upload
-/*  modificare le righe di body-parser nel modo seguente:
-	app.use("/", body_parser.json({ "limit": "10mb" }));
-	app.use("/", body_parser.urlencoded({"extended": true, "limit": "10mb"}))
 */
 
 

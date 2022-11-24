@@ -15,10 +15,10 @@ import cloudinary, { UploadApiResponse } from "cloudinary";
 
 // config
 const PORT = process.env.PORT || 1337;
+dotenv.config({ path: ".env" });
 const connectionString: any = process.env.connectionString;
 const DB_NAME = "5B";
 const app = express();
-dotenv.config({ path: ".env" });
 cloudinary.v2.config({
 	cloud_name: process.env.CLOUD_NAME,
 	api_key: process.env.API_KEY,
@@ -63,11 +63,8 @@ function init() {
         else
             paginaErrore = "<h1>Risorsa non trovata</h1>"
     });
+	console.log(connectionString)
 }
-
-
-
-
 
 
 
@@ -117,7 +114,9 @@ const corsOptions = {
 };
 // app.use("/", cors(corsOptions) as any);
 
+
 // 7. binary upload
+app.use(fileUpload({}))
 /*
 app.use(fileUpload({
 	"limits ": { "fileSize ": (10 * 1024 * 1024) }  // 10 MB
@@ -163,7 +162,9 @@ app.get("/api/images", (req, res, next) => {
 
 
 app.post("/api/uploadBinary", (req, res, next) => {
-	if (!req.files || Object.keys(req.files).length == 0 || !req.body.username)
+	console.log(req["files"])
+	console.log(req.body.username)
+	if (!req["files"] || Object.keys(req["files"]).length == 0 || !req.body.username)
 		res.status(400).send('Manca immagine o username');
 	else {
 		let file = req.files.img as UploadedFile;
@@ -290,7 +291,11 @@ app.use('/', function (req, res, next) {
 });
 
 
-app.use("/", function (err, req, res, next) {
-  console.log("***************  ERRORE CODICE SERVER ", err.message, "  *****************");
-})
+app.use("/", (err: any, req: any, res: any, next: any) => {
+	/*if(req["client"]) 
+		req["client"].close();*/
+    console.log("SERVER ERROR " + err.stack);
+    res.status(500);
+    res.send("ERRR: " + err.message);
+});
 

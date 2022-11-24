@@ -1,0 +1,9 @@
+ese_03_upload
+doc
+git.txt
+
+node_modules
+.env
+package-lock.json
+.vscode
+server-toPrint.ts

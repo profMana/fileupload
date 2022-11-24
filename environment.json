@@ -1,0 +1,18 @@
+ {
+	"connectionString":{
+		"ATLAS" : "mongodb+srv://admin:admin@cluster0.xoopk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+		"LOCAL" : "mongodb://127.0.0.1:27017"
+	},
+		
+    "cloudinary": {
+        "CLOUD_NAME": "roberto-mana",
+        "API_KEY": "673959956397347",
+        "API_SECRET": "S5i6zR8IdDdcD_LJ76doW1qrLuk",
+        "CLOUDINARY_URL": "CLOUDINARY_URL=cloudinary://673959956397347:S5i6zR8IdDdcD_LJ76doW1qrLuk@roberto-mana"
+    },
+	 	
+	"mailServer":{
+		"user":"roberto.mana@vallauri.edu",
+		"password":"xxxx"
+	}
+ }

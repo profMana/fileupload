@@ -115,7 +115,7 @@ const corsOptions = {
   },
   credentials: true
 };
-app.use("/", cors(corsOptions) as any);
+// app.use("/", cors(corsOptions) as any);
 
 // 7. binary upload
 /*

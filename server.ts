@@ -126,22 +126,24 @@ app.use(fileUpload({
 */
 
 
+// apertura della connessione
+app.use("/api/", function (req, res, next) {
+	let connection = new MongoClient(connectionString);
+    connection.connect()
+	.catch((err: any) => {
+		let msg = "Errore di connessione al db"
+		res.status(503).send(msg)
+	}) 
+	.then((client: any) => {
+		req["client"]=client;
+		next();
+	})
+})
+
+
 //****************************************************************
 //elenco delle routes di risposta al client
 //****************************************************************
-// middleware di apertura della connessione
-app.use("/api/", (req, res, next) => {
-  MongoClient.connect(process.env.MONGODB_URI || connectionString, (err, client) => {
-    if (err) {
-		res.status(503).send("Db connection error");
-    } 
-	else {
-		console.log("Connection made");
-		req["client"] = client;
-		next();
-    }
-  });
-});
 
 // listener specifici: 
 app.get("/api/images", (req, res, next) => {
